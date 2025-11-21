@@ -27,7 +27,7 @@ async def generate_image(data: ImageRequest):
     payload = {
         "inputs": base64.b64encode(img_bytes).decode("utf-8"),  # Base64 인코딩
         "parameters": {
-            "prompt": data.promp
+            "prompt": data.prompt
         }
     }
 
