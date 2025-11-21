@@ -9,7 +9,7 @@ load_dotenv()
 app = FastAPI()
 
 HF_API_KEY = os.getenv("HF_API_KEY")
-API_URL = "https://router.huggingface.co/models/stabilityai/stable-diffusion-2"
+API_URL = "https://router.huggingface.co/fal-ai/fal-ai/flux-kontext/dev?_subdomain=queue"
 
 class ImageRequest(BaseModel):
     image_base64: str  # iOS에서 Base64로 이미지를 보내도록 함
