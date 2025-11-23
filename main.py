@@ -31,6 +31,9 @@ async def send_hf_request(client: httpx.AsyncClient, image_base64: str, prompt: 
     payload = {"inputs": image_base64, "parameters": {"prompt": prompt}}
     
     response = await client.post(url=API_URL, headers=headers, json=payload)
+    print("\n🔥🔥🔥 HF 응답 상태코드:", response.status_code)
+    print("🔥🔥🔥 HF 응답 바디:", response.text, "\n")
+
     if response.status_code != httpx.codes.OK:
         raise Exception(f"HF API 호출 실패: {response.text}")
     
@@ -83,7 +86,7 @@ async def generate_image(data: ImageRequest):
         try:
             status_url = await send_hf_request(client, data.image_base64, data.prompt)
         except Exception as e:
-            return {"message": "HF API 호출 실패", "details": str(e)}
+            return {"error": True, "message": "HF API 호출 실패", "details": str(e)}
         
         # 2) Polling으로 완료 대기
         try:
